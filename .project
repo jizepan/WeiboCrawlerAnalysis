@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Weibo_Crawler_Analysis</name>
+	<name>Weibo_Crawler</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,4 +14,131 @@
 	<natures>
 		<nature>org.python.pydev.pythonNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>.project</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/.project</locationURI>
+		</link>
+		<link>
+			<name>.pydevproject</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/.pydevproject</locationURI>
+		</link>
+		<link>
+			<name>Analysis</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>README.md</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/README.md</locationURI>
+		</link>
+		<link>
+			<name>Weibo_Scrapy</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>__init__.py</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/__init__.py</locationURI>
+		</link>
+		<link>
+			<name>copy</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>result</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>Analysis/Keyword_Clustering.py</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/Analysis/Keyword_Clustering.py</locationURI>
+		</link>
+		<link>
+			<name>Analysis/Keyword_Frequency.py</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/Analysis/Keyword_Frequency.py</locationURI>
+		</link>
+		<link>
+			<name>Weibo_Scrapy/Main.py</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/Weibo_Scrapy/Main.py</locationURI>
+		</link>
+		<link>
+			<name>Weibo_Scrapy/Self_Setup.py</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/Weibo_Scrapy/Self_Setup.py</locationURI>
+		</link>
+		<link>
+			<name>Weibo_Scrapy/all_setup.txt</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/Weibo_Scrapy/all_setup.txt</locationURI>
+		</link>
+		<link>
+			<name>Weibo_Scrapy/setup.txt</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/Weibo_Scrapy/setup.txt</locationURI>
+		</link>
+		<link>
+			<name>copy/setup.txt</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/copy/setup.txt</locationURI>
+		</link>
+		<link>
+			<name>result/search上海</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/result/search%E4%B8%8A%E6%B5%B7</locationURI>
+		</link>
+		<link>
+			<name>result/search上海 下雨</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/result/search%E4%B8%8A%E6%B5%B7%20%E4%B8%8B%E9%9B%A8</locationURI>
+		</link>
+		<link>
+			<name>result/search北京 下雨</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/result/search%E5%8C%97%E4%BA%AC%20%E4%B8%8B%E9%9B%A8</locationURI>
+		</link>
+		<link>
+			<name>result/search北京 热</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/result/search%E5%8C%97%E4%BA%AC%20%E7%83%AD</locationURI>
+		</link>
+		<link>
+			<name>result/search成都 下雨</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/result/search%E6%88%90%E9%83%BD%20%E4%B8%8B%E9%9B%A8</locationURI>
+		</link>
+		<link>
+			<name>result/search武汉 下雨</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/result/search%E6%AD%A6%E6%B1%89%20%E4%B8%8B%E9%9B%A8</locationURI>
+		</link>
+		<link>
+			<name>result/search贵阳 下雨</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/result/search%E8%B4%B5%E9%98%B3%20%E4%B8%8B%E9%9B%A8</locationURI>
+		</link>
+		<link>
+			<name>result/search郑州 下雨</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/result/search%E9%83%91%E5%B7%9E%20%E4%B8%8B%E9%9B%A8</locationURI>
+		</link>
+		<link>
+			<name>result/search重庆 下雨</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/result/search%E9%87%8D%E5%BA%86%20%E4%B8%8B%E9%9B%A8</locationURI>
+		</link>
+		<link>
+			<name>result/成都 analysis.txt</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/result/%E6%88%90%E9%83%BD%20analysis.txt</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
