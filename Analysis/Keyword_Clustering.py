@@ -1,7 +1,7 @@
 # -*- coding:utf-8-*-
 '''
 中文分词和微博词频统计
-Author： @Tai Lei 邰磊
+Author： @Tai Lei 邰磊 @Jize.pan 潘基泽
 July 7: 文件建立，构建基本微博词频分析
 '''
 
@@ -155,7 +155,7 @@ class Clustering_analysis():
         self.lda_cluster()
     
 if __name__ =="__main__":
-    weibo_file = u"首都机场weibo"    
+    weibo_file = u"首都机场weibo"
     file_address = os.path.dirname(os.path.abspath(__file__))
     freq_path = file_address + '\\result\\' + weibo_file+"freq.txt"
     weibo_path = file_address + '\\result\\' + weibo_file
