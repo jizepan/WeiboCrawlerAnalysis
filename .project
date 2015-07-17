@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Weibo_Crawler_Analysis</name>
+	<name>Weibo_Crawler</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,4 +14,46 @@
 	<natures>
 		<nature>org.python.pydev.pythonNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>.project</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/.project</locationURI>
+		</link>
+		<link>
+			<name>.pydevproject</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/.pydevproject</locationURI>
+		</link>
+		<link>
+			<name>Analysis</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/Analysis</locationURI>
+		</link>
+		<link>
+			<name>README.md</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/README.md</locationURI>
+		</link>
+		<link>
+			<name>Weibo_Scrapy</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/Weibo_Scrapy</locationURI>
+		</link>
+		<link>
+			<name>__init__.py</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/__init__.py</locationURI>
+		</link>
+		<link>
+			<name>copy</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/copy</locationURI>
+		</link>
+		<link>
+			<name>result</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Crawler/result</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
