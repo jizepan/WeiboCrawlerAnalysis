@@ -6,7 +6,6 @@ July 7: 文件建立，构建基本微博词频分析
 '''
 
 import jieba
-
 import lda
 import numpy as np
 import nltk
@@ -157,8 +156,8 @@ class Clustering_analysis():
 if __name__ =="__main__":
     weibo_file = u"首都机场weibo"
     file_address = os.path.dirname(os.path.abspath(__file__))
-    freq_path = file_address + '\\result\\' + weibo_file+"freq.txt"
-    weibo_path = file_address + '\\result\\' + weibo_file
+    freq_path = file_address + '\\..\\result\\' + weibo_file+"freq.txt"
+    weibo_path = file_address + '\\..\\result\\' + weibo_file
     weibo_cluster = Clustering_analysis(weibo_path, freq_path)
     weibo_cluster.allrun()
     print "all_finish"
