@@ -21,7 +21,10 @@ import os
 import time
 
 #get the file address relative
-file_address = os.path.dirname(os.path.abspath(__file__)) + r'\result'+'\\'
+rootPath = os.path.abspath('../')
+#sys.path.append(rootPath+"\\Weibo_Scrapy")
+#file_address = os.path.dirname(os.path.abspath(__file__)) + r'\result'+'\\'
+file_address = rootPath + r'\result'+'\\'
 
 #Set standard of encoding for Chinese Input
 reload(sys) 
@@ -247,7 +250,7 @@ class Weibo():
 
         
     
-    def search_statuses(self, keyword, pages = 50):
+    def search_statuses(self, keyword, pages = 30):
         url = "http://weibo.cn/search/"
         
         f = open(file_address+'search'+keyword, 'w')

@@ -94,27 +94,27 @@ class Keyword_Frequency():
             plt.bar(item-len(self.hour_num)+24, self.hour_num[item])
             plt.axis([0,24,0,max(self.hour_num)])
         plt.show()
+        plt.savefig('hour')
         
         for item in xrange(len(self.day_num)):
             begin_day = int(self.day_dict[0])
             plt.bar(item+begin_day, self.day_num[item])
             plt.axis([int(self.day_dict[0]),int(self.day_dict[-1]), 0, max(self.day_num)])
         plt.show()
+        plt.savefig('day')
         
 if __name__ =="__main__":
 
     uid = '2041499443' 
     url = 'http://weibo.cn/'
-    file_address = os.path.dirname(os.path.abspath(__file__))
     
-    weibo_scrapy = Weibo(url,uid)
-    weibo_scrapy.request_check(weibo_scrapy.home_url)
-    weibo_scrapy.get_name()
-    weibo_scrapy.search_statuses(u'南京 下雨')
-    
+#     weibo_scrapy = Weibo(url,uid)
+#     weibo_scrapy.request_check(weibo_scrapy.home_url)
+#     weibo_scrapy.get_name()
+#     weibo_scrapy.search_statuses(u'南京 下雨')
     
     weibo_file = u"search南京 下雨"    
-    search_path = file_address + '\\result\\' + weibo_file
+    search_path = rootPath + '\\result\\' + weibo_file
     keyword_object = Keyword_Frequency(search_path)
     
     keyword_object.Get_Text()
