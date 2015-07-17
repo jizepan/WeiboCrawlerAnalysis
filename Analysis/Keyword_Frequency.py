@@ -30,6 +30,9 @@ class Keyword_Frequency():
         #file_address = folder+"\\"+weibo_file
         f = open(self.path, 'r')
         weibo_lines = f.readlines()[1:]
+#         for item in weibo_lines:
+#             if u"这个夏天有鹿晗" in item:
+#                 weibo_lines.remove(item)
         #weibo_sentence = []
         #weibo_all_words = []
         #构建dict keys list
@@ -75,8 +78,8 @@ class Keyword_Frequency():
         for item_num in xrange(min(len(weibo_lines), 10000)):
             #item = weibo_lines[item_num].decode('utf-8')
             item = weibo_lines[item_num].split()
-            if len(item) >= 3:       
-                
+            #if len(item) >= 3 and u"这个夏天有鹿晗"  not in weibo_lines[item_num]:       
+            if   len(item) >= 3 : 
                 #提取时间戳
                 hour_text =  item[1][:13]
                 
@@ -90,18 +93,18 @@ class Keyword_Frequency():
         self.day_num = day_num
         self.hour_num = hour_num
         
-        for item in xrange(len(self.hour_num)-24,len(self.hour_num)):
-            plt.bar(item-len(self.hour_num)+24, self.hour_num[item])
-            plt.axis([0,24,0,max(self.hour_num)])
+        for item in xrange(len(self.hour_num)-min(24,len(self.hour_num)),len(self.hour_num)):
+            plt.bar(item-len(self.hour_num)+min(24,len(self.hour_num)), self.hour_num[item])
+            plt.axis([0,min(24,len(self.hour_num)),0,max(self.hour_num)])
         plt.show()
-        plt.savefig('hour')
+
         
         for item in xrange(len(self.day_num)):
             begin_day = int(self.day_dict[0])
             plt.bar(item+begin_day, self.day_num[item])
             plt.axis([int(self.day_dict[0]),int(self.day_dict[-1]), 0, max(self.day_num)])
         plt.show()
-        plt.savefig('day')
+
         
 if __name__ =="__main__":
 
@@ -111,13 +114,12 @@ if __name__ =="__main__":
 #     weibo_scrapy = Weibo(url,uid)
 #     weibo_scrapy.request_check(weibo_scrapy.home_url)
 #     weibo_scrapy.get_name()
-#     weibo_scrapy.search_statuses(u'南京 下雨')
+#     weibo_scrapy.search_statuses(u'北京 下雨',pages = 100)
     
-    weibo_file = u"search南京 下雨"    
+    weibo_file = u"search北京 下雨"
     search_path = rootPath + '\\result\\' + weibo_file
     keyword_object = Keyword_Frequency(search_path)
     
     keyword_object.Get_Text()
-
 
     

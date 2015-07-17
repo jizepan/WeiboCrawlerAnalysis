@@ -14,7 +14,8 @@ from pymongo import MongoClient
 import os
 
 #Get file address now
-file_address = os.path.dirname(os.path.abspath(__file__))
+rootPath = os.path.abspath('../')
+#file_address = os.path.dirname(os.path.abspath(__file__))
 
 # # get cookies
 # chromeCookies = Get_Chrome_Cookies()
@@ -25,7 +26,7 @@ url= 'http://weibo.cn/'
 
 # setup file to get uid and start weibo id
 setup_file = 'setup.txt' 
-copy_file = file_address + '\copy\setup.txt'
+copy_file = rootPath + '\\copy\\setup.txt'
 
 #get on server mongodbmain
 client = MongoClient('54.223.178.198', 27110)

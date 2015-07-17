@@ -82,6 +82,7 @@ class Weibo():
             cookies_array[dummy_i]= string.replace(cookies_array[dummy_i], ';', '', 1)
             cookies_array[dummy_i] = cookies_array[dummy_i].split('=')
         self.cookies = dict(cookies_array)
+        
     def statuses(self, start_id = ' '):
         '''
         time id coding problem
