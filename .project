@@ -18,42 +18,37 @@
 		<link>
 			<name>.project</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Crawler/.project</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/WeiboCrawlerAnalysis/.project</locationURI>
 		</link>
 		<link>
 			<name>.pydevproject</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Crawler/.pydevproject</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/WeiboCrawlerAnalysis/.pydevproject</locationURI>
 		</link>
 		<link>
 			<name>Analysis</name>
 			<type>2</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Crawler/Analysis</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/WeiboCrawlerAnalysis/Analysis</locationURI>
 		</link>
 		<link>
 			<name>README.md</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Crawler/README.md</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/WeiboCrawlerAnalysis/README.md</locationURI>
 		</link>
 		<link>
 			<name>Weibo_Scrapy</name>
 			<type>2</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Crawler/Weibo_Scrapy</locationURI>
-		</link>
-		<link>
-			<name>__init__.py</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Crawler/__init__.py</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/WeiboCrawlerAnalysis/Weibo_Scrapy</locationURI>
 		</link>
 		<link>
 			<name>copy</name>
 			<type>2</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Crawler/copy</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/WeiboCrawlerAnalysis/copy</locationURI>
 		</link>
 		<link>
 			<name>result</name>
 			<type>2</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Crawler/result</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/WeiboCrawlerAnalysis/result</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

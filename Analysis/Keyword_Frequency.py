@@ -5,10 +5,12 @@ Author： @Tai Lei 邰磊
 July 15: 关键词与实际天气联系，比如：下雨微博数量与实际降雨量之间的关系
 '''
 
-import matplotlib.pyplot as plt
-import os
-from Main import Weibo
 
+import matplotlib.pyplot as plt
+import os,sys
+rootPath = os.path.abspath('../')
+sys.path.append(rootPath+"\\Weibo_Scrapy")
+from Main import Weibo
 
 #统Main词数量与时间的关系
 class Keyword_Frequency():
