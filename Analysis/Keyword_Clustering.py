@@ -26,12 +26,24 @@ sys.path.append(rootPath+"\\Weibo_Scrapy")
 #提取全文本词汇，统计全文词频
 class Clustering_analysis():
     
-    def __init__(self, weibo_path, freq_path, topK =10, topics_count = 5, ottopK=5):
+    def __init__(self, weibo_path, freq_path, topK =10, topics_count = 3, ottopK=5):
         self.path = weibo_path
         self.freqpath = freq_path
+        
+        #全文词频
         self.allwords = []
+        
+        #全文句子，strings形式
         self.allsentence = []
+        
+        #句子词list形式
+        self.sentencelist = []
+        
+        #Feature Vector 组合
         self.keywords = []
+        
+        #时间戳
+        self.time_flag= []
         
         self.weibo_count = 0
         
@@ -44,6 +56,9 @@ class Clustering_analysis():
         #输出多少关键词
         self.outputtopk = ottopK
         
+        #极端情况微博 index hash list
+        self.index_list = []
+        
     def get_text_weibo(self):
         #file_address = folder+"\\"+weibo_file
         f = open(self.path, 'r')
@@ -53,14 +68,18 @@ class Clustering_analysis():
         for item_num in xrange(min(len(weibo_lines), 10000)):
             item = weibo_lines[item_num].decode('utf-8')
             item = item.split()
-            if len(item) >= 4:
+            if (len(item) >= 4) and (u'延误' in weibo_lines[item_num].decode('utf-8')):
+            #if (len(item) >= 4):    
                 weibo_text =  item[3]
                 #去除数字和其他标点符号
                 weibo_text = "".join([i for i in weibo_text if not (i.isdigit() or i in u",.@:#&【】;（），。、：！/\!_转发理由微博")])
                 seg_list = jieba.cut(weibo_text, cut_all=False)
                 sentence =  " ".join(seg_list)
+                print sentence
+                self.sentencelist.append(sentence.split(" "))
                 self.allwords= self.allwords + sentence.split(" ")
                 self.allsentence.append(sentence)
+                self.time_flag.append(item[2])
         #print "len:", len(weibo_all_words)
         self.weibo_count = len(self.allsentence)
         return self.allwords,  self.allsentence 
@@ -122,7 +141,9 @@ class Clustering_analysis():
             for tag in tags:
                 #save_string = "tag:"+ tag[0].encode('utf-8') +' ' + "weight:"+ str(tag[1]) +'\n'
                 #f.write(save_string)
+                print tag[0],
                 self.keywords.append(tag[0])
+            print " "
         #f.close()
         return 0
     
@@ -146,20 +167,42 @@ class Clustering_analysis():
         n_top_word = self.outputtopk
         for i,  topic_dist in enumerate(topic_word):
             topic_words = np.array(self.keywords)[np.argsort(topic_dist)][:-n_top_word:-1]
-            print ' '.join(topic_words)
-        #K-means
-                
+            print i, ' '.join(topic_words)
+        
+        doc_topic = model.doc_topic_
+        
+        for i in xrange(len(self.allsentence)):
+            if (doc_topic[i].argmax() == 0 or doc_topic[i].argmax() == 3):
+                self.index_list.append(i)
+    
+    def Weather_Analysis(self):
+        
+        Weather_keyword = [u'雷' , u'冰'  , u'风'  , u'雾' ,  u'雨', u'雪']
+        
+        for i in xrange(len(self.index_list)):
+            temp_list = []
+            for item in Weather_keyword:
+                if item in self.allsentence[i]:
+                    temp_list.append(item)
+            if  len(temp_list) != 0:
+                for item in temp_list:
+                    print item,
+                print self.time_flag[i]
+                #print self.allsentence[i]
+            
+      
     def allrun(self):
         self.get_text_weibo()
         self.text_freq()
         self.jieba_TF_IDF()
         self.lda_cluster()
+        self.Weather_Analysis()
     
 if __name__ =="__main__":
     weibo_file = u"首都机场weibo"
     #file_address = os.path.dirname(os.path.abspath(__file__))
     freq_path = rootPath + '\\result\\' + weibo_file+"freq.txt"
     weibo_path = rootPath + '\\result\\' + weibo_file
-    weibo_cluster = Clustering_analysis(weibo_path, freq_path)
+    weibo_cluster = Clustering_analysis(weibo_path, freq_path, topics_count = 4, ottopK=7)
     weibo_cluster.allrun()
     print "all_finish"

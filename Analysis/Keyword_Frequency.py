@@ -114,9 +114,9 @@ if __name__ =="__main__":
 #     weibo_scrapy = Weibo(url,uid)
 #     weibo_scrapy.request_check(weibo_scrapy.home_url)
 #     weibo_scrapy.get_name()
-#     weibo_scrapy.search_statuses(u'北京 下雨',pages = 100)
+#     weibo_scrapy.search_statuses(u'裁判 傻逼',pages = 100)
     
-    weibo_file = u"search北京 下雨"
+    weibo_file = u"search裁判  傻逼"
     search_path = rootPath + '\\result\\' + weibo_file
     keyword_object = Keyword_Frequency(search_path)
     

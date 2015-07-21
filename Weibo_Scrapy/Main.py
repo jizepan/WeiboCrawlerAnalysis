@@ -415,16 +415,25 @@ class Weibo():
                 #print "uid_name: ", uid_name[0]
                 self.name = uid_name[0]
                 return self.name
-    def item(self):
+    def item(self, item):
         '''
         weibo #item#
-        
         http://huati.weibo.com/k/邓超出轨 from PC
         get url redirect
         and the id of item
         then 
         '''
-        pass
+        #.com端提取话题的id
+        url = "http://huati.weibo.com/k/"+item
+        RedirectRes = requests.get(url)
+        id_text =  RedirectRes.history[1].url
+        #正则匹配 http://weibo.com/p/100808af11cd4d7396d740cfd8b8e69374de79?k=%E9%82%93%E8%B6%85%E5%87%BA%E8%BD%A8&_from_=huati_topic
+        item_id_re = re.search(r'(?<=\/p\/).+(?=\?k\=)',id_text)
+        if item_id_re:
+            item_id = item_id_re.group()
+        url = "http://m.weibo.cn/p/index?containerid="+item_id
+        
+        
     def comments(self):
         '''
         sibling_next of the pms
@@ -513,10 +522,10 @@ if __name__ == '__main__':
     
     #Scrapy Sina
     weibo_scrapy = Weibo(url,uid)
-    weibo_scrapy.request_check(weibo_scrapy.home_url)
-    weibo_scrapy.get_name()
+    #weibo_scrapy.request_check(weibo_scrapy.home_url)
+    #weibo_scrapy.get_name()
     #start_id = weibo_scrapy.statuses(' ')
-    weibo_scrapy.search_statuses(u'郑州 下雨')
+    weibo_scrapy.item(u'邓超出轨')
     #weibo_scrapy.fans()
     #weibo_scrapy.search_users('航空', 10000)
     #weibo_scrapy.following()
