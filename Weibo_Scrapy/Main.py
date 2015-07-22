@@ -9,7 +9,7 @@ Get all of the weibo in history and now from weibo UID
 import requests
 from bs4 import BeautifulSoup
 from bs4 import element
-#from getcookies import Get_Chrome_Cookies
+from Getcookies import Get_Chrome_Cookies
 #from _mysql import result
 import string
 import sys
@@ -26,6 +26,10 @@ rootPath = os.path.abspath('../')
 #file_address = os.path.dirname(os.path.abspath(__file__)) + r'\result'+'\\'
 file_address = rootPath + r'\result'+'\\'
 
+#Get Cookies from Chrome Cookies
+chromeCookies = Get_Chrome_Cookies()
+Cookies_default = chromeCookies.get_cookies(".weibo.cn")
+
 #Set standard of encoding for Chinese Input
 reload(sys) 
 sys.setdefaultencoding('utf-8')
@@ -35,7 +39,7 @@ client = MongoClient('54.223.178.198', 27110)
 db = client['weibo-database']
 collection = db['weibo-collection']
 
-Cookies_default = {'_T_WM':'59dd96edf8a384849f4aa87db6872e41', 'SUB':'_2A254lxFWDeTxGeNI6FYV9yfNzzWIHXVYe78erDV6PUJbrdBeLWP8kW1L5HRza0vtGEw0AR8k3D_YPVnBGA..', 'SUHB':'0N21q-v5V84CQy', 'SSOLoginState':'1435721990'}
+#Cookies_default = {'_T_WM':'59dd96edf8a384849f4aa87db6872e41', 'SUB':'_2A254lxFWDeTxGeNI6FYV9yfNzzWIHXVYe78erDV6PUJbrdBeLWP8kW1L5HRza0vtGEw0AR8k3D_YPVnBGA..', 'SUHB':'0N21q-v5V84CQy', 'SSOLoginState':'1435721990'}
 
 headers_default = {
                    'Connection': 'keep-alive',
@@ -340,7 +344,8 @@ class Weibo():
         url = self.main_url + self.uid+'/fans'
         fans_soup = self.request_check(url,)
         pages = self.get_pages(fans_soup)
-
+        boy = 0
+        girl = 0
         f = open(file_address+self.name+'fans', 'wb')
         for x in xrange (1,pages):
             payload = {'page': str(x)}
@@ -351,18 +356,35 @@ class Weibo():
             for div_tag in page_soup.body.find_all('br'):
                 #if div_tag.prev_sibling().has_attr('href'):
                 if (count%2==0):
-                    fans_tag =  div_tag.parent.find('a')
+                    tag_list = []
+                    for item in  div_tag.parent.find_all('a'):
+                        tag_list.append(item)
+                    #tag_list = list(div_tag.parent.find_all('a'))
+                    
+                    #姓名tag
+                    fans_tag = tag_list[0]
+                    
+                    #性别tag_text
+                    gender_text = tag_list[1].get_text()
+
+                    if u'他' in gender_text:
+                        boy+=1
+
+                    elif u'她' in gender_text:
+                        girl+=1
+                        
                     find_url = fans_tag['href']
                     
                     #re to find uid, number of latters, like: /456123564$
                     fans_uid = re.search(r'(?<=[/])[^/]+$',find_url)
-                    if fans_uid:
-                        print fans_uid.group()
+#                     if fans_uid:
+#                         print fans_uid.group()
                     
                     f.write(fans_tag['href']+" "+fans_tag.get_text()+' '+fans_uid.group() + '\n')
                 count += 1             
         f.close()
         print "get fans"
+        print boy,girl
     def following(self):
         '''
         get follow of the uid user
@@ -370,31 +392,47 @@ class Weibo():
         url = self.main_url + self.uid+ '/follow'
         fans_soup = self.request_check(url)
         pages = self.get_pages(fans_soup)
-
+        boy = 0
+        girl = 0
         f = open(file_address+self.name+'follow', 'wb')
         for x in xrange (1,pages):
             payload = {'page': str(x)}
-            result = self.request_check(url, params=payload)
-            page_soup = BeautifulSoup(result.content)
+            page_soup = self.request_check(url, params=payload)
             
             count = 0
             #find 'br' tag
             for div_tag in page_soup.body.find_all('br'):
                 #if div_tag.prev_sibling().has_attr('href'):
                 if (count%2==0):
-                    fans_tag =  div_tag.parent.find('a')
+                    tag_list = []
+                    for item in  div_tag.parent.find_all('a'):
+                        tag_list.append(item)
+                    #tag_list = list(div_tag.parent.find_all('a'))
+                    
+                    #姓名tag
+                    fans_tag = tag_list[0]
+                    
+                    #性别tag_text
+                    gender_text = tag_list[1].get_text()
+
+                    if u'他' in gender_text:
+                        boy+=1
+
+                    elif u'她' in gender_text:
+                        girl+=1
+                    
                     find_url = fans_tag['href']
                     #re to find uid
                     fans_uid = re.search(r'(?<=[/])[^/]+$',find_url)
-                    if fans_uid:  
-                        print fans_uid.group()
-                    #if type(fans_tag) == element.Tag:
-                    print fans_tag
+#                     if fans_uid:  
+#                         print fans_uid.group()
+#                     if type(fans_tag) == element.Tag:
+#                     print fans_tag
                     f.write(fans_tag['href']+" "+fans_tag.get_text()+' '+fans_uid.group() + '\n')
                 count += 1             
         f.close()
         print "get follow"
-    
+        print boy, girl
     def get_pages(self, BS_html):
         '''
         get the search pages
@@ -515,17 +553,19 @@ if __name__ == '__main__':
     #url = "http://weibo.cn/u/1776514395"
     #uid = '1689944994'  
     #uid = '2041499443'  
-    uid = '2041499443' 
+    uid = '1884909353' 
         
     #Scrapy Zhihu
     #x = requests.get("http://www.zhihu.com", cookies=getcookies(".zhihu.com")) 
     
     #Scrapy Sina
     weibo_scrapy = Weibo(url,uid)
-    #weibo_scrapy.request_check(weibo_scrapy.home_url)
-    #weibo_scrapy.get_name()
+    weibo_scrapy.request_check(weibo_scrapy.home_url)
+    weibo_scrapy.get_name()
     #start_id = weibo_scrapy.statuses(' ')
-    weibo_scrapy.item(u'邓超出轨')
+    #weibo_scrapy.fans()
+    weibo_scrapy.following()
+    #weibo_scrapy.item(u'邓超出轨')
     #weibo_scrapy.fans()
     #weibo_scrapy.search_users('航空', 10000)
     #weibo_scrapy.following()

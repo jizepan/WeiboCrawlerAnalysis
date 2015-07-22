@@ -26,9 +26,14 @@ sys.path.append(rootPath+"\\Weibo_Scrapy")
 #提取全文本词汇，统计全文词频
 class Clustering_analysis():
     
-    def __init__(self, weibo_path, freq_path, topK =10, topics_count = 3, ottopK=5):
+    def __init__(self, weibo_path, freq_path, word_path, topK =10, topics_count = 3, ottopK=5):
         self.path = weibo_path
+        
+        #逆向词频文件
         self.freqpath = freq_path
+        
+        #去掉其他地名和机场
+        self.wordpath = word_path
         
         #全文词频
         self.allwords = []
@@ -75,7 +80,6 @@ class Clustering_analysis():
                 weibo_text = "".join([i for i in weibo_text if not (i.isdigit() or i in u",.@:#&【】;（），。、：！/\!_转发理由微博")])
                 seg_list = jieba.cut(weibo_text, cut_all=False)
                 sentence =  " ".join(seg_list)
-                print sentence
                 self.sentencelist.append(sentence.split(" "))
                 self.allwords= self.allwords + sentence.split(" ")
                 self.allsentence.append(sentence)
@@ -141,9 +145,10 @@ class Clustering_analysis():
             for tag in tags:
                 #save_string = "tag:"+ tag[0].encode('utf-8') +' ' + "weight:"+ str(tag[1]) +'\n'
                 #f.write(save_string)
-                print tag[0],
+                
+                #print tag[0],
                 self.keywords.append(tag[0])
-            print " "
+            #print " "
         #f.close()
         return 0
     
@@ -171,15 +176,34 @@ class Clustering_analysis():
         
         doc_topic = model.doc_topic_
         
+        #选取第0类和第3类微博文本
         for i in xrange(len(self.allsentence)):
             if (doc_topic[i].argmax() == 0 or doc_topic[i].argmax() == 3):
                 self.index_list.append(i)
     
     def Weather_Analysis(self):
         
+        f= open(self.wordpath,'r')
+        word_all = f.readlines()
+        word_list = []
+        for item in word_all:
+            item = item.split()
+            word_list.append(item[0].decode('utf-8'))
+        
+        #排除其他影响词汇
+        index_list = []
+        for i in self.index_list:
+            a = list(set(self.sentencelist[i]) & set(word_list))
+            if len(a)==0: 
+                index_list.append(i)
+        self.index_list = index_list
+        
+        print "list_length: ",len(self.index_list)
+        
         Weather_keyword = [u'雷' , u'冰'  , u'风'  , u'雾' ,  u'雨', u'雪']
         
-        for i in xrange(len(self.index_list)):
+        #输出极端天气情况
+        for i in self.index_list:
             temp_list = []
             for item in Weather_keyword:
                 if item in self.allsentence[i]:
@@ -200,9 +224,11 @@ class Clustering_analysis():
     
 if __name__ =="__main__":
     weibo_file = u"首都机场weibo"
+    word_file = u"Airport_dict(Beijing).txt"
     #file_address = os.path.dirname(os.path.abspath(__file__))
     freq_path = rootPath + '\\result\\' + weibo_file+"freq.txt"
     weibo_path = rootPath + '\\result\\' + weibo_file
-    weibo_cluster = Clustering_analysis(weibo_path, freq_path, topics_count = 4, ottopK=7)
+    word_path = rootPath + '\\Word_Dict_Parse\\'+word_file
+    weibo_cluster = Clustering_analysis(weibo_path, freq_path, word_path, topics_count = 4, ottopK=7)
     weibo_cluster.allrun()
     print "all_finish"
